@@ -47,10 +47,6 @@ export const Auth: React.FC = (props) => {
     if (token && expiredAt) {
       setToken(token, parseInt(expiredAt, 10) / (3600 * 24));
       history.push('/');
-
-      if ((location as any).protocol !== "https:") {
-        (location as any).protocol = "http:";
-      }
     }
   }, [location, setToken, history]);
 
