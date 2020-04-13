@@ -1,0 +1,26 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "jsRules": {},
+  "rules": {
+    "newline-before-return": true,
+    "no-console": false,
+    "no-debugger": true,
+    "no-var-keyword": true,
+    "triple-equals": true,
+    "semicolon": [true, "always"],
+    "arrow-return-shorthand": true,
+    "trailing-comma": [true, {
+      "singleline": "never",
+      "multiline": {
+        "objects": "always",
+        "arrays": "always",
+        "functions": "never",
+        "typeLiterals": "ignore"
+      }
+    }]
+  },
+  "rulesDirectory": []
+}
