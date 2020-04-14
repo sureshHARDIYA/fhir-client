@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
 import { useState, useCallback } from "react";
 import _get from 'lodash/get';
-import { PATIENT_LIST_QUERY } from "./query";
+import { ORGANIZATION_LIST_QUERY } from "./query";
 import { notification } from "antd";
 
 interface ISearchResult<T> {
@@ -10,12 +10,15 @@ interface ISearchResult<T> {
   loading: boolean;
 }
 
-export interface IPatient {
+export interface IOrganization {
   id: string;
-  gender: string;
   active: boolean | null;
-  birthDate: string | null;
-  resourceType: "Patient";
+  resourceType: "Organization";
+  name: string;
+  address: {
+    text: string
+    country: string
+  }[];
 }
 
 export const useSearch = () => {
@@ -24,7 +27,7 @@ export const useSearch = () => {
     page: 1,
   });
 
-  const { data, loading, error } = useQuery<ISearchResult<IPatient>>(PATIENT_LIST_QUERY, {
+  const { data, loading, error } = useQuery<ISearchResult<IOrganization>>(ORGANIZATION_LIST_QUERY, {
     variables,
     fetchPolicy: "cache-first",
   });
@@ -36,7 +39,7 @@ export const useSearch = () => {
   const total = _get(data, 'result.total', 0);
   const page = _get(data, 'result.page', 0);
   const pageSize = _get(data, 'result.pageSize', variables.limit);
-  const list = _get(data, 'result.entry', []).map((({ resource }: { resource: IPatient }) => resource));
+  const list = _get(data, 'result.entry', []).map((({ resource }: { resource: IOrganization }) => resource));
 
   const onChange = useCallback((pageNumber: number) => setVariable((pre) => ({
     ...pre,

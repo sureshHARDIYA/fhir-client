@@ -6,11 +6,6 @@ import * as serviceWorker from './serviceWorker';
 import { App } from './containers';
 import { Auth } from './containers/Auth';
 
-
-if ((location as any).protocol === "https:") { // eslint-disable-line
-  (location as any).protocol = "http:"; // eslint-disable-line
-}
-
 ReactDOM.render((
   <BrowserRouter>
     <Auth>
