@@ -15,6 +15,14 @@ const Valueset = React.lazy(() => import('./Valueset/Valueset'));
 const Questionnaire = React.lazy(() => import('./Questionnaire/Questionnaire'));
 const Organization = React.lazy(() => import('./Organization/Organization'));
 
+const Loading = () => (
+  <Row justify="center" align="middle" style={{ height: '100vh' }}>
+    <Col>
+      <Spin spinning />
+    </Col>
+  </Row>
+);
+
 const AppAuth: FC<{ onLogout: () => void }> = ({ onLogout }) => {
   const history = useHistory();
   const selected = [useLocation().pathname.replace(/^\//, '') || "dashboards"];
@@ -58,7 +66,7 @@ const AppAuth: FC<{ onLogout: () => void }> = ({ onLogout }) => {
         </Layout.Sider>
         <Layout>
           <Layout.Content style={{ padding: 15 }}>
-            <Suspense fallback={<Spin spinning />}>
+            <Suspense fallback={<Loading />}>
               <Switch>
                 <Route exact path={"/"} component={Dashboard} />
                 <Route exact path={"/patients"} component={Patient} />
@@ -80,7 +88,7 @@ const AppAuth: FC<{ onLogout: () => void }> = ({ onLogout }) => {
 const AppUnauth = () => (
   <Layout>
     <Layout.Content>
-      <Suspense fallback={<Spin spinning />}>
+      <Suspense fallback={<Loading />}>
         <Switch>
           <Route component={Login} />
         </Switch>
@@ -102,13 +110,7 @@ export const App: FC<{}> = () => {
   }, [setToken]);
 
   if (loading) {
-    return (
-      <Row justify="center" align="middle" style={{ height: '100vh' }}>
-        <Col>
-          <Spin spinning />
-        </Col>
-      </Row>
-    );
+    return <Loading />;
   }
 
   return (

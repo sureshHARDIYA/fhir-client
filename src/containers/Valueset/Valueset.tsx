@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col, Table, Divider } from 'antd';
 import { useSearch } from './useSearch';
+import { ButtonAction } from '../../components/ActionView';
 
 const columns = (pageSize: number, current: number) => [
   {
@@ -24,6 +25,13 @@ const columns = (pageSize: number, current: number) => [
     title: "Publisher",
     key: "publisher",
     dataIndex: "publisher",
+  },
+  {
+    key: "id",
+    width: 80,
+    title: "Action",
+    dataIndex: "id",
+    render: (_: any, record: any) => <ButtonAction title="Valueset Detail" record={record} />,
   },
 ];
 

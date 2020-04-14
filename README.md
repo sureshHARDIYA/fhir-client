@@ -1,15 +1,27 @@
-## Apollo-client-starter
-- Simple init reactjs project with create react app and apollo-client based on typescript.
-- If you want to connect a apollo-server template typescript [click here](https://github.com/hunghkit/apollo-server-demo).
-- If you want to connect a apollo-server template javascript [click here](https://github.com/hunghkit/graphql-template-by-module).
+# Introduction
 
-# In development
+- `FHIR-client` is a [`HL7 FHIR`](http://hl7.org/fhir/resourcelist.html) on front-end with apollo-client based on typescript.
+- If you want to connect a server, you can use [Intromat-FHIR](https://github.com/sureshHARDIYA/intromat-fhir).
+- If you want to connect a authenticate server, you can use [Auth-server](https://github.com/sureshHARDIYA/graphql-auth-server) based on `OpenId Connect 0Auth Server`
+
+# Development
 ```
-- Step 1: git clone git@github.com:hunghkit/apollo-client-starter.git
-- Step 2: cd apollo-client-starter && yarn install
-- Step 3: yarn start
+- Step 1: git clone git@github.com:sureshHARDIYA/fhir-client.git
+- Step 2: cd fhir-client && yarn install
+- Step 3: cp .envexample .env
+- Step 4: yarn start
 ```
 
-## Note
-Template is created by Create React App you can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Roadmaps
+
+Create all HL7 FHIR resources.
+- PatientList
+- OrganizationList
+- QuestionnaireList
+- ValusetList
+- ....etc
+-
+
+# Demo [click here](https://fhir-client.herokuapp.com)
+
+# Licence: MIT

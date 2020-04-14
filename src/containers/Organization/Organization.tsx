@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col, Table, Divider } from 'antd';
 import { useSearch, IOrganization } from './useSearch';
+import { ButtonAction } from '../../components/ActionView';
 
 const columns = (pageSize: number, current: number) => [
   {
@@ -35,6 +36,13 @@ const columns = (pageSize: number, current: number) => [
     key: "active",
     dataIndex: "active",
     render: (item: boolean | null) => <span>{item ? "Active" : "Not Active"}</span>,
+  },
+  {
+    key: "id",
+    width: 80,
+    title: "Action",
+    dataIndex: "id",
+    render: (_: any, record: any) => <ButtonAction title="Organization Detail" record={record} />,
   },
 ];
 

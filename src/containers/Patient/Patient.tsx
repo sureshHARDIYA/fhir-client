@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Table, Divider } from 'antd';
 import { useSearch } from './useSearch';
-// import { Link } from 'react-router-dom';
+import { ButtonAction } from '../../components/ActionView';
 
 const columns = (pageSize: number, current: number) => [
   {
@@ -35,6 +35,13 @@ const columns = (pageSize: number, current: number) => [
     key: "active",
     dataIndex: "active",
     render: (item: boolean) => <span>{item ? "Active" : "Not Active"}</span>,
+  },
+  {
+    key: "id",
+    width: 80,
+    title: "Action",
+    dataIndex: "id",
+    render: (_: any, record: any) => <ButtonAction title="Patient Detail" record={record} />,
   },
 ];
 
