@@ -97,8 +97,8 @@ export const App: FC<{}> = () => {
   const { isAuthenticated, setToken, onLogout } = useAuth();
 
   useEffect(() => {
-    setToken(Cookie.get("access_token") || '');
     setLoad(false);
+    setToken(Cookie.get("access_token") || '');
   }, [setToken]);
 
   if (loading) {

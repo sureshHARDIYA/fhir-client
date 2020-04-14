@@ -22,7 +22,7 @@ const columns = (pageSize: number, current: number) => [
     render: (_: string, record: IOrganization) => {
       const addressLine = record.address || [];
 
-      return addressLine.map((item: { text: string | null }, index: number) => !!item.text && (
+      return addressLine.map((item: { text?: string | null }, index: number) => !!item.text && (
         <span key={index}>
           {item.text}
           {","}

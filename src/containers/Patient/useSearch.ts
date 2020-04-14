@@ -12,9 +12,9 @@ interface ISearchResult<T> {
 
 export interface IPatient {
   id: string;
-  gender: string;
-  active: boolean | null;
-  birthDate: string | null;
+  gender?: string;
+  active?: boolean | null;
+  birthDate?: string | null;
   resourceType: "Patient";
 }
 
