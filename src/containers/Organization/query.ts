@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const ORGANIZATION_LIST_QUERY = gql`
-  query OrganizationList($limit: Int, $page: Int) {
+  query ORGANIZATION_LIST_QUERY($limit: Int, $page: Int) {
     result: OrganizationList(limit: $limit, page: $page) {
       total
       page
