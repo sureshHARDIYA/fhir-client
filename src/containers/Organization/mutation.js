@@ -7,3 +7,11 @@ export const ORGANIZATION_REMOVE_MUTATION = gql`
     }
   }
 `;
+
+export const ORGANIZATION_CREATE_MUTATION = gql`
+  mutation OrganizationCreate($id: id, $resource: Organization_Input!) {
+    result: OrganizationCreate(id: $id, resource: $resource) {
+      id
+    }
+  }
+`;

@@ -1,9 +1,10 @@
 import React from 'react';
-import { Row, Col, Table, Divider, Button, Popconfirm } from 'antd';
+import { Row, Col, Table, Button, Popconfirm, Divider } from 'antd';
 import { useSearch, IOrganization } from './useSearch';
 import { ButtonAction } from '../../components/ActionView';
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { useDelete } from './useDelete';
+import { Link } from 'react-router-dom';
 
 const columns = (pageSize: number, current: number, onDelete: (id: string) => void) => [
   {
@@ -62,7 +63,7 @@ const columns = (pageSize: number, current: number, onDelete: (id: string) => vo
     ),
   },
 ];
-// onDelete(record.id)
+
 export const Organization = () => {
   const { onDelete } = useDelete();
   const { total, loading, current, pageSize, onChange, list, onPageSize } = useSearch();
@@ -71,7 +72,7 @@ export const Organization = () => {
     <Row>
       <Col span={24}>
         <Divider>
-          Organization List
+          Organization List <Link to="/organizations/new"><PlusOutlined /> Add</Link>
         </Divider>
       </Col>
       <Col span={24}>

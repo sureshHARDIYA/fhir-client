@@ -10,13 +10,23 @@ export const PATIENT_LIST_QUERY = gql`
 
       entry {
         resource {
-          ...on Patient {
+          ... on Patient {
             id
             gender
             active
             birthDate
             resourceType
-            name { family given text use }
+            name {
+              family
+              given
+              text
+              use
+            }
+            address {
+              id
+              line
+              type
+            }
           }
         }
       }
