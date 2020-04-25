@@ -1,9 +1,12 @@
 import React from 'react';
-import { Row, Col, Table, Divider } from 'antd';
+import { Row, Col, Table, Button, Popconfirm, Divider } from 'antd';
 import { useSearch, IOrganization } from './useSearch';
 import { ButtonAction } from '../../components/ActionView';
+import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
+import { useDelete } from './useDelete';
+import { Link } from 'react-router-dom';
 
-const columns = (pageSize: number, current: number) => [
+const columns = (pageSize: number, current: number, onDelete: (id: string) => void) => [
   {
     title: "No",
     key: "id",
@@ -42,18 +45,34 @@ const columns = (pageSize: number, current: number) => [
     width: 80,
     title: "Action",
     dataIndex: "id",
-    render: (_: any, record: any) => <ButtonAction title="Organization Detail" record={record} />,
+    render: (_: any, record: any) => (
+      <div style={{ display: 'flex' }}>
+        <ButtonAction title="Organization Detail" record={record} />
+        <Popconfirm
+          okText="Yes"
+          cancelText="No"
+          placement="topLeft"
+          onConfirm={() => onDelete(record.id)}
+          title={"Are you sure to delete this organization?"}
+        >
+          <Button type="danger">
+            <DeleteOutlined />
+          </Button>
+        </Popconfirm>
+      </div>
+    ),
   },
 ];
 
 export const Organization = () => {
+  const { onDelete } = useDelete();
   const { total, loading, current, pageSize, onChange, list, onPageSize } = useSearch();
 
   return (
     <Row>
       <Col span={24}>
         <Divider>
-          Organization List
+          Organization List <Link to="/organizations/new"><PlusOutlined /> Add</Link>
         </Divider>
       </Col>
       <Col span={24}>
@@ -61,7 +80,7 @@ export const Organization = () => {
           rowKey="id"
           dataSource={list}
           loading={loading}
-          columns={columns(pageSize, current)}
+          columns={columns(pageSize, current, onDelete)}
           pagination={{
             total,
             current,

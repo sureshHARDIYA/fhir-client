@@ -7,6 +7,7 @@ import { DashboardOutlined, BankOutlined, UsergroupAddOutlined, FormOutlined, Co
 
 import { useAuth } from './Auth';
 import { client } from "../apollo-client";
+import { OrganizationNew } from './Organization';
 
 const Login = React.lazy(() => import('./Login/Login'));
 const Dashboard = React.lazy(() => import('./Dashboard/Dashboard'));
@@ -71,6 +72,7 @@ const AppAuth: FC<{ onLogout: () => void }> = ({ onLogout }) => {
                 <Route exact path={"/"} component={Dashboard} />
                 <Route exact path={"/patients"} component={Patient} />
                 <Route exact path={"/organizations"} component={Organization} />
+                <Route exact path={"/organizations/new"} component={OrganizationNew} />
                 <Route exact path={"/questionnaires"} component={Questionnaire} />
                 <Route exact path={"/valuesets"} component={Valueset} />
               </Switch>
