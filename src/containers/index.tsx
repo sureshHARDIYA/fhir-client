@@ -1,23 +1,36 @@
-import React, { FC, Suspense, useState, useEffect } from 'react';
+import React, { FC, Suspense, useState, useEffect } from "react";
 import Cookie from "js-cookie";
-import { Layout, Spin, Row, Col, Button, Menu } from 'antd';
-import { ApolloProvider } from '@apollo/react-hooks';
-import {BrowserRouter, Route, Switch, useHistory, useLocation} from "react-router-dom";
-import { DashboardOutlined, BankOutlined, UsergroupAddOutlined, FormOutlined, CopyOutlined } from '@ant-design/icons';
+import { Layout, Spin, Row, Col, Button, Menu } from "antd";
+import { ApolloProvider } from "@apollo/react-hooks";
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  useHistory,
+  useLocation
+} from "react-router-dom";
+import {
+  DashboardOutlined,
+  BankOutlined,
+  UsergroupAddOutlined,
+  FormOutlined,
+  CopyOutlined
+} from "@ant-design/icons";
 
-import { useAuth } from './Auth';
+import { useAuth } from "./Auth";
 import { client } from "../apollo-client";
-import { OrganizationNew } from './Organization';
+import { OrganizationNew } from "./Organization";
 
-const Login = React.lazy(() => import('./Login/Login'));
-const Dashboard = React.lazy(() => import('./Dashboard/Dashboard'));
-const Patient = React.lazy(() => import('./Patient/Patient'));
-const Valueset = React.lazy(() => import('./Valueset/Valueset'));
-const Questionnaire = React.lazy(() => import('./Questionnaire/Questionnaire'));
-const Organization = React.lazy(() => import('./Organization/Organization'));
+const Login = React.lazy(() => import("./Login/Login"));
+const Patient = React.lazy(() => import("./Patient/Patient"));
+const Valueset = React.lazy(() => import("./Valueset/Valueset"));
+const Dashboard = React.lazy(() => import("./Dashboard/Dashboard"));
+const Observation = React.lazy(() => import("./Observation/Observation"));
+const Organization = React.lazy(() => import("./Organization/Organization"));
+const Questionnaire = React.lazy(() => import("./Questionnaire/Questionnaire"));
 
 const Loading = () => (
-  <Row justify="center" align="middle" style={{ height: '100vh' }}>
+  <Row justify="center" align="middle" style={{ height: "100vh" }}>
     <Col>
       <Spin spinning />
     </Col>
@@ -26,16 +39,14 @@ const Loading = () => (
 
 const AppAuth: FC<{ onLogout: () => void }> = ({ onLogout }) => {
   const history = useHistory();
-  const selected = [useLocation().pathname.replace(/^\//, '') || "dashboards"];
+  const selected = [useLocation().pathname.replace(/^\//, "") || "dashboards"];
 
   return (
     <Layout>
-      <Layout.Header style={{ padding: '0 15px' }}>
+      <Layout.Header style={{ padding: "0 15px" }}>
         <Row gutter={16}>
           <Col flex="auto">
-            <Button onClick={() => history.push('/')}>
-              Admin Management
-            </Button>
+            <Button onClick={() => history.push("/")}>Admin Management</Button>
           </Col>
           <Col flex="100px">
             <Button onClick={() => onLogout()}>Logout</Button>
@@ -44,23 +55,29 @@ const AppAuth: FC<{ onLogout: () => void }> = ({ onLogout }) => {
       </Layout.Header>
       <Layout>
         <Layout.Sider width={200} className="site-layout-background">
-          <Menu
-            theme="dark"
-            defaultSelectedKeys={selected}
-          >
-            <Menu.Item key="dashboards" onClick={() => history.push('/')}>
+          <Menu theme="dark" defaultSelectedKeys={selected}>
+            <Menu.Item key="dashboards" onClick={() => history.push("/")}>
               <DashboardOutlined /> Dashboard
             </Menu.Item>
-            <Menu.Item key="patients" onClick={() => history.push('/patients')}>
+            <Menu.Item key="patients" onClick={() => history.push("/patients")}>
               <UsergroupAddOutlined /> Patient
             </Menu.Item>
-            <Menu.Item key="organizations" onClick={() => history.push('/organizations')}>
+            <Menu.Item
+              key="organizations"
+              onClick={() => history.push("/organizations")}
+            >
               <BankOutlined /> Organization
             </Menu.Item>
-            <Menu.Item key="questionnaires" onClick={() => history.push('/questionnaires')}>
+            <Menu.Item
+              key="questionnaires"
+              onClick={() => history.push("/questionnaires")}
+            >
               <FormOutlined /> Questionnaire
             </Menu.Item>
-            <Menu.Item key="valuesets" onClick={() => history.push('/valuesets')}>
+            <Menu.Item
+              key="valuesets"
+              onClick={() => history.push("/valuesets")}
+            >
               <CopyOutlined /> Valueset
             </Menu.Item>
           </Menu>
@@ -71,15 +88,24 @@ const AppAuth: FC<{ onLogout: () => void }> = ({ onLogout }) => {
               <Switch>
                 <Route exact path={"/"} component={Dashboard} />
                 <Route exact path={"/patients"} component={Patient} />
+                <Route exact path={"/observations"} component={Observation} />
                 <Route exact path={"/organizations"} component={Organization} />
-                <Route exact path={"/organizations/new"} component={OrganizationNew} />
-                <Route exact path={"/questionnaires"} component={Questionnaire} />
+                <Route
+                  exact
+                  path={"/organizations/new"}
+                  component={OrganizationNew}
+                />
+                <Route
+                  exact
+                  path={"/questionnaires"}
+                  component={Questionnaire}
+                />
                 <Route exact path={"/valuesets"} component={Valueset} />
               </Switch>
             </Suspense>
           </Layout.Content>
-          <Layout.Footer style={{ textAlign: 'center' }}>
-            Management System © 2020
+          <Layout.Footer style={{ textAlign: "center" }}>
+            HL7 FHIR based Healthcare Information System © 2020
           </Layout.Footer>
         </Layout>
       </Layout>
@@ -96,7 +122,7 @@ const AppUnauth = () => (
         </Switch>
       </Suspense>
     </Layout.Content>
-    <Layout.Footer style={{ textAlign: 'center' }}>
+    <Layout.Footer style={{ textAlign: "center" }}>
       Management System © 2020
     </Layout.Footer>
   </Layout>
@@ -108,7 +134,7 @@ export const App: FC<{}> = () => {
 
   useEffect(() => {
     setLoad(false);
-    setToken(Cookie.get("access_token") || '');
+    setToken(Cookie.get("access_token") || "");
   }, [setToken]);
 
   if (loading) {
@@ -117,10 +143,7 @@ export const App: FC<{}> = () => {
 
   return (
     <ApolloProvider client={client}>
-      <Layout
-        className="admin-components"
-        style={{ minHeight: '100vh' }}
-      >
+      <Layout className="admin-components" style={{ minHeight: "100vh" }}>
         <BrowserRouter>
           {isAuthenticated ? <AppAuth onLogout={onLogout} /> : <AppUnauth />}
         </BrowserRouter>
