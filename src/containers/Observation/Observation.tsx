@@ -11,12 +11,12 @@ const columns = (pageSize: number, current: number) => [
     width: 80,
     dataIndex: "id",
     render: (_: any, _r: any, index: number) =>
-      pageSize * (current - 1) + index + 1
+      pageSize * (current - 1) + index + 1,
   },
   {
     title: "Status",
     key: "status",
-    dataIndex: "status"
+    dataIndex: "status",
   },
   {
     key: "id",
@@ -25,8 +25,8 @@ const columns = (pageSize: number, current: number) => [
     dataIndex: "id",
     render: (_: any, record: any) => (
       <ButtonAction title="Observation Detail" record={record} />
-    )
-  }
+    ),
+  },
 ];
 
 export const Observation = () => {
@@ -37,7 +37,7 @@ export const Observation = () => {
     pageSize,
     onChange,
     list,
-    onPageSize
+    onPageSize,
   } = useSearch();
 
   return (
@@ -56,7 +56,7 @@ export const Observation = () => {
             current,
             pageSize,
             onChange,
-            onShowSizeChange: onPageSize
+            onShowSizeChange: onPageSize,
           }}
         />
       </Col>

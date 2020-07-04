@@ -19,14 +19,14 @@ export interface IObservation {
 export const useSearch = () => {
   const [variables, setVariable] = useState({
     limit: 20,
-    page: 1
+    page: 1,
   });
 
   const { data, loading, error } = useQuery<ISearchResult<IObservation>>(
     OBSERVATION_LIST_QUERY,
     {
       variables,
-      fetchPolicy: "cache-first"
+      fetchPolicy: "cache-first",
     }
   );
 
@@ -45,7 +45,7 @@ export const useSearch = () => {
     (pageNumber: number) =>
       setVariable(pre => ({
         ...pre,
-        page: pageNumber
+        page: pageNumber,
       })),
     []
   );
@@ -55,7 +55,7 @@ export const useSearch = () => {
       setVariable(pre => ({
         ...pre,
         page: 1,
-        limit: pageSizeNumber
+        limit: pageSizeNumber,
       })),
     []
   );
@@ -67,6 +67,6 @@ export const useSearch = () => {
     current: page,
     pageSize,
     onChange,
-    onPageSize
+    onPageSize,
   };
 };
